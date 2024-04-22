@@ -5,7 +5,7 @@ import './index.scss';
 import { Success } from './components/Success';
 import { Users } from './components/Users';
 
-function App() {
+export const App = () => {
   const [success, setSuccess] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -19,15 +19,16 @@ function App() {
     setSuccess(true);
   };
 
+  if (success) {
+    return (
+      <div className="App">
+        <Success count={invitedUsers.length} />
+      </div>
+    );
+  }
   return (
     <div className="App">
-      {success ? (
-        <Success count={invitedUsers.length} />
-      ) : (
-        <Users onClickSendInvites={onClickSendInvites} />
-      )}
+      <Users onClickSendInvites={onClickSendInvites} />
     </div>
   );
-}
-
-export default App;
+};
